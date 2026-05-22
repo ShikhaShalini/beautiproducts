@@ -1,0 +1,38 @@
+<section class="zack-section" style="padding:80px 0;" data-section-id="{{ section.id }}">
+  <div class="zack-container" style="max-width:900px;text-align:center;" data-zack-reveal>
+    <p class="zack-eyebrow">{{ section.settings.kicker }}</p>
+    <div class="swiper zack-testimonials">
+      <div class="swiper-wrapper">
+        {% for block in section.blocks %}
+          <div class="swiper-slide" {{ block.shopify_attributes }}>
+            <blockquote style="font-family:'Playfair Display',serif;font-size:clamp(34px,5vw,58px);line-height:1;letter-spacing:-.045em;margin:28px 0;">"{{ block.settings.quote }}"</blockquote>
+            <p>{{ block.settings.author }}</p>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Beauty notes" }
+  ],
+  "blocks": [
+    {
+      "type": "quote",
+      "name": "Quote",
+      "settings": [
+        { "type": "textarea", "id": "quote", "label": "Quote", "default": "The textures feel expensive, wearable, and beautiful on my vanity." },
+        { "type": "text", "id": "author", "label": "Author", "default": "Verified customer" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Testimonials", "blocks": [{ "type": "quote" }, { "type": "quote" }, { "type": "quote" }] }
+  ]
+}
+{% endschema %}

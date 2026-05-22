@@ -1,0 +1,31 @@
+{% liquid
+  assign selected_variant = product.selected_or_first_available_variant
+  assign on_sale = false
+  if product.compare_at_price_max > product.price
+    assign on_sale = true
+  endif
+%}
+
+<article class="zack-product-card" data-zack-reveal>
+  <a href="{{ product.url }}" class="zack-product-card__image" aria-label="View {{ product.title | escape }}">
+    {% if product.featured_media %}
+      {{ product.featured_media | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360, 540, 720, 900', alt: product.title }}
+    {% endif %}
+  </a>
+
+  {% if on_sale %}
+    <span class="zack-eyebrow" style="position:absolute;left:16px;top:16px;background:#c75578;color:#fff;border-radius:999px;padding:6px 10px;letter-spacing:.14em;">Sale</span>
+  {% endif %}
+
+  <button type="button" class="zack-wishlist" aria-label="Add {{ product.title | escape }} to wishlist" style="position:absolute;right:16px;top:16px;width:40px;height:40px;border:0;border-radius:999px;background:rgba(255,255,255,.88);color:#c75578;cursor:pointer;">Love</button>
+
+  <div class="zack-product-card__body">
+    <h3>{{ product.title }}</h3>
+    <p>{{ product.price | money }}{% if on_sale %} <s>{{ product.compare_at_price_max | money }}</s>{% endif %}</p>
+    <p aria-label="Rated 5 out of 5" style="color:#d6a14f;letter-spacing:.12em;">***** <span style="color:#907476;letter-spacing:0;">({{ product.metafields.reviews.rating_count | default: 24 }})</span></p>
+    <form method="post" action="/cart/add">
+      <input type="hidden" name="id" value="{{ selected_variant.id }}">
+      <button type="submit" class="zack-button" style="width:100%;margin-top:12px;">Quick add</button>
+    </form>
+  </div>
+</article>

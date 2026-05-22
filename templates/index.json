@@ -1,0 +1,26 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-banner"
+    },
+    "categories": {
+      "type": "category-slider"
+    },
+    "products": {
+      "type": "featured-products"
+    },
+    "promos": {
+      "type": "promo-banner"
+    },
+    "instagram": {
+      "type": "instagram-feed"
+    },
+    "testimonials": {
+      "type": "testimonials"
+    },
+    "footer": {
+      "type": "footer"
+    }
+  },
+  "order": ["hero", "categories", "products", "promos", "instagram", "testimonials", "footer"]
+}

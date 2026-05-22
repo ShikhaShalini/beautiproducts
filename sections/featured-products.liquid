@@ -1,0 +1,28 @@
+<section class="zack-section" style="background:#fff5f2;padding:80px 0;" data-section-id="{{ section.id }}">
+  <div class="zack-container">
+    <div style="text-align:center;max-width:720px;margin:0 auto 48px;" data-zack-reveal>
+      <p class="zack-eyebrow">{{ section.settings.kicker }}</p>
+      <h2 style="font-size:clamp(42px,6vw,72px);line-height:.95;margin:16px 0;">{{ section.settings.heading }}</h2>
+      <p>{{ section.settings.text }}</p>
+    </div>
+    <div class="zack-grid zack-products">
+      {% for product in section.settings.collection.products limit: section.settings.product_limit %}
+        {% render 'zack-product-card', product: product %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured products",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Best sellers" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Soft glam icons, loved daily" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "High-converting product cards with quick add, wishlisting, sale states, and hover motion." },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "range", "id": "product_limit", "label": "Products", "min": 4, "max": 12, "step": 1, "default": 8 }
+  ],
+  "presets": [{ "name": "Featured products" }]
+}
+{% endschema %}
